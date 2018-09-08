@@ -26,7 +26,6 @@ class WordBar extends Component {
         <input
           className="word-input full-size bordered rounded padded"
           type="text"
-          placeholder="Enter a word"
           value={this.state.word}
           onChange={this.changeWord}
           onKeyPress={this.onEnter}
