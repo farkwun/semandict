@@ -804,6 +804,8 @@ export default [
   "fresh",
   "fresher",
   "freshest",
+  "friend",
+  "friends",
   "friendliness",
   "friendly",
   "frolic",
