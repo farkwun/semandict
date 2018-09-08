@@ -12,9 +12,9 @@ class Game extends Component {
   render() {
     const words = this.state.words.map(w => <Word word={w} />);
     return (
-      <div>
+      <div className="game">
         <WordBar addWord={this.addWord} />
-        {words}
+        <div className="words">{words}</div>
       </div>
     );
   }

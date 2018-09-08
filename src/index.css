@@ -1,5 +1,55 @@
-body {
-  margin: 0;
-  padding: 0;
+html, body {
+  margin:0;
+  padding:0;
+  height:100%;
+  width:100%;
   font-family: sans-serif;
+}
+
+#root {
+  height:100%;
+  width:100%;
+  overflow:hidden;
+}
+
+.game {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height:80%;
+  width:100%;
+  overflow:hidden;
+}
+
+.word-bar {
+  width:80%;
+  height: 10%;
+}
+
+.word-input {
+  font-size: 40px
+}
+
+.words {
+  margin: auto;
+  position: absolute;
+  top: 0;
+}
+
+.full-size {
+  height:100%;
+  width:100%;
+}
+
+.rounded {
+  border-radius: 10px;
+}
+
+.bordered {
+  border: 1px darkGray solid;
+}
+
+.padded {
+  padding: 15px;
 }

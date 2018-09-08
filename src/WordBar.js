@@ -24,6 +24,7 @@ class WordBar extends Component {
     return (
       <div className="word-bar">
         <input
+          className="word-input full-size bordered rounded padded"
           type="text"
           placeholder="Enter a word"
           value={this.state.word}
