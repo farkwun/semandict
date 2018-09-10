@@ -12,6 +12,7 @@ import {
   BASE_SCORE,
   MULTIPLIER,
   CONVERSATION_LENGTH,
+  HINT_THRESHOLD,
   getGameOverText
 } from "./Constants";
 
@@ -56,7 +57,7 @@ class Game extends Component {
     } else if (BAD_WORDS.has(word)) {
       this.addBadWord(this.state.badWords)(word);
       this.setState({ tryCounter: 0 });
-    } else if (this.state.tryCounter < 15) {
+    } else if (this.state.tryCounter < HINT_THRESHOLD) {
       this.setToastText("That word doesn't make me feel anything.");
       this.setState({ tryCounter: this.state.tryCounter + 1 });
     } else {
