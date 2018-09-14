@@ -15,7 +15,7 @@ export const CONVERSATION_LENGTH = 10;
 
 export const MULTIPLIER = 10;
 
-export const HINT_THRESHOLD = 5;
+export const HINT_THRESHOLD = 3;
 
 const GAME_OVER_TEXT = [
   "You like hurting me.",

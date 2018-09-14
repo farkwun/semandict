@@ -26,28 +26,39 @@ class Game extends Component {
     tryCounter: 0
   };
 
-  addGoodWord = base => word => this.setState({ goodWords: [...base, word] }, this.setScore);
+  addGoodWord = base => word =>
+    this.setState({ goodWords: [...base, word] }, this.setScore);
 
-  addBadWord = base => word => this.setState({ badWords: [...base, word] }, this.setScore);
+  addBadWord = base => word =>
+    this.setState({ badWords: [...base, word] }, this.setScore);
 
   setScore = () => {
     const { goodWords, badWords } = this.state;
-    const score = goodWords.length * MULTIPLIER - badWords.length * MULTIPLIER + BASE_SCORE;
+    const score =
+      goodWords.length * MULTIPLIER - badWords.length * MULTIPLIER + BASE_SCORE;
     this.setState({ score }, this.setGameOver);
   };
 
   setGameOver = () => {
     const { score, goodWords, badWords } = this.state;
     const gameOver =
-      score <= MIN_SCORE || score >= MAX_SCORE || goodWords.length + badWords.length >= CONVERSATION_LENGTH;
-    this.setState({ gameOver }, gameOver ? this.setToastText(getGameOverText(score)) : () => {});
+      score <= MIN_SCORE ||
+      score >= MAX_SCORE ||
+      goodWords.length + badWords.length >= CONVERSATION_LENGTH;
+    this.setState(
+      { gameOver },
+      gameOver ? this.setToastText(getGameOverText(score)) : () => {}
+    );
   };
 
   setToastText = toastText => this.setState({ toastText });
 
   addWord = word => {
     this.setState({ toastText: "" });
-    if (this.state.goodWords.includes(word) || this.state.badWords.includes(word)) {
+    if (
+      this.state.goodWords.includes(word) ||
+      this.state.badWords.includes(word)
+    ) {
       this.setToastText("That word doesn't make me feel anything anymore.");
       return;
     }
@@ -57,11 +68,14 @@ class Game extends Component {
     } else if (BAD_WORDS.has(word)) {
       this.addBadWord(this.state.badWords)(word);
       this.setState({ tryCounter: 0 });
-    } else if (this.state.tryCounter < HINT_THRESHOLD) {
-      this.setToastText("That word doesn't make me feel anything.");
-      this.setState({ tryCounter: this.state.tryCounter + 1 });
     } else {
-      this.setToastText("That word doesn't make me *feel anything*.");
+      const asterisks = "*".repeat(
+        Math.floor(this.state.tryCounter / HINT_THRESHOLD)
+      );
+      this.setState({ tryCounter: this.state.tryCounter + 1 });
+      this.setToastText(
+        `That word doesn't make me ${asterisks}feel anything${asterisks}.`
+      );
     }
   };
 
@@ -79,9 +93,16 @@ class Game extends Component {
     const badWords = this.state.badWords.map(w => <Word word={w} />);
     const { score, gameOver } = this.state;
     return (
-      <div className="game" style={{ backgroundColor: `rgb(${score}, ${score}, ${score})` }}>
+      <div
+        className="game"
+        style={{ backgroundColor: `rgb(${score}, ${score}, ${score})` }}
+      >
         <div className="title outline-text">talk to me</div>
-        {gameOver ? <ResetButton resetGame={this.resetGame} /> : <WordBar disabled={gameOver} addWord={this.addWord} />}
+        {gameOver ? (
+          <ResetButton resetGame={this.resetGame} />
+        ) : (
+          <WordBar disabled={gameOver} addWord={this.addWord} />
+        )}
         {this.state.toastText !== "" && <Toast text={this.state.toastText} />}
         {gameOver && <div className="words right-aligned">{badWords}</div>}
         {gameOver && <div className="words left-aligned">{goodWords}</div>}
