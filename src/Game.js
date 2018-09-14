@@ -23,7 +23,7 @@ class Game extends Component {
     toastText: "",
     score: BASE_SCORE,
     gameOver: false,
-    tryCounter: 0
+    tryCounter: 1
   };
 
   addGoodWord = base => word =>
@@ -64,10 +64,10 @@ class Game extends Component {
     }
     if (GOOD_WORDS.has(word)) {
       this.addGoodWord(this.state.goodWords)(word);
-      this.setState({ tryCounter: 0 });
+      this.setState({ tryCounter: 1 });
     } else if (BAD_WORDS.has(word)) {
       this.addBadWord(this.state.badWords)(word);
-      this.setState({ tryCounter: 0 });
+      this.setState({ tryCounter: 1 });
     } else {
       const asterisks = "*".repeat(
         Math.floor(this.state.tryCounter / HINT_THRESHOLD)
